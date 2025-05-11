@@ -9,6 +9,7 @@ add_library(common_lib STATIC
     # "include/common/socket_factory.h"
     src/message_serialization.cc
     src/socket_factory.cc 
+    src/error_codes.cc
     # posix_socket.cc and winsock_socket.cc are #included by socket_factory.cc
     # If you compile them separately:
     # $<IF:$<PLATFORM_ID:Windows>,src/winsock_socket.cc,src/posix_socket.cc>

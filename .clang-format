@@ -1,0 +1,61 @@
+# .clang-format
+Language: Cpp
+BasedOnStyle: Google
+
+# Common customizations people might make EVEN ON TOP OF GOOGLE STYLE,
+# or to align with specific project needs.
+# Google's default ColumnLimit is 80. Many projects increase this.
+ColumnLimit: 100 # Or 80 if you want strict Google.
+
+# Google style uses 2 spaces for indentation.
+IndentWidth: 2
+TabWidth: 2
+UseTab: Never
+
+# Pointer Alignment: Google style typically aligns to the left of the star/ampersand.
+# PointerAlignment: Left # This is Google's default.
+
+# Brace Wrapping: Google style has very specific rules.
+# 'BasedOnStyle: Google' handles most of this.
+# For example, function braces usually on the next line.
+# Braces around namespaces are not indented.
+
+# Include Directives
+# Google style has specific include order (often C system, C++ system, other libs, project headers).
+# clang-format's 'Google' style attempts to follow this.
+SortIncludes: true
+IncludeBlocks: Regroup # Default for Google style in clang-format
+# The IncludeCategories below are a common way to enforce Google's preferred order.
+# You might need to adjust regexes based on your project structure.
+IncludeCategories:
+  - Regex:           '^<.*\.h>' # C system headers (most specific first)
+    Priority:        1
+  - Regex:           '^<.*>'     # C++ standard library and other angle-bracket includes
+    Priority:        2
+  - Regex:           '^".*(common|server|client)/.*\.h"' # Your project's public headers (e.g. from other modules)
+    Priority:        3
+  - Regex:           '^".*\.h"'  # Your project's private headers (within the same module)
+    Priority:        4
+# Note: Google often has more specific rules, like separating project headers by path depth.
+# This is a reasonable approximation for clang-format.
+
+# Spaces
+SpaceBeforeParens: ControlStatements # if (foo), but functionName(foo)
+SpacesInParentheses: false
+SpaceAfterCStyleCast: true # Google style: (int) x
+SpaceBeforeAssignmentOperators: true
+
+# Indentation of Preprocessor Directives
+# Google style typically does not indent preprocessor directives.
+IndentPPDirectives: None
+
+# Other Google Style specifics often handled by BasedOnStyle: Google
+# - No exceptions (traditionally, though this is evolving for some Google projects)
+# - Specific rules for line breaking, initializers, etc.
+# - Use of `nullptr`
+
+# AlignTrailingComments: true # Google style generally aligns comments.
+
+# C++ Specific
+Cpp11BracedListStyle: true # For {}-initialized lists, true aligns like parameters. Google often uses this.
+DerivePointerAlignment: false # Use the explicitly set PointerAlignment.
